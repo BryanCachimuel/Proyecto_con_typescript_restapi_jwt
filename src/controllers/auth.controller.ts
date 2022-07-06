@@ -36,5 +36,5 @@ export const signin = async (req: Request, res: Response) => {
 }
 
 export const profile = (req: Request, res: Response) => {
-  
+    res.send('profile')
 }
