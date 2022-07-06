@@ -9,6 +9,8 @@ export const signup = async (req: Request, res: Response) => {
         email: req.body.email,
         password: req.body.password
     });
+    // contraseña del usuario encriptada
+    user.password = await user.encryptPassword(user.password)
     const saveUser = await user.save() 
     
     // generando token

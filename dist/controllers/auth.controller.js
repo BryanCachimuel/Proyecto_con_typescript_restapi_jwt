@@ -21,6 +21,8 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         email: req.body.email,
         password: req.body.password
     });
+    // contraseña del usuario encriptada
+    user.password = yield user.encryptPassword(user.password);
     const saveUser = yield user.save();
     // generando token
     const token = jsonwebtoken_1.default.sign({ _id: saveUser._id }, process.env.TOKEN_SECRET || 'tokentest');
