@@ -1,3 +1,7 @@
+// dependencia para utilizar variables de entorno
+import dotenv from 'dotenv';
+dotenv.config();
+
 import app from "./app";
 
 // importando el archivo con la conexión a base de datos

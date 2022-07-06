@@ -14,15 +14,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.profile = exports.signin = exports.signup = void 0;
 const User_1 = __importDefault(require("../models/User"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const user = new User_1.default({
         username: req.body.username,
         email: req.body.email,
         password: req.body.password
     });
-    const saveuser = yield user.save();
-    console.log(saveuser);
-    res.send('usuario registrado correctamente');
+    const saveUser = yield user.save();
+    // generando token
+    const token = jsonwebtoken_1.default.sign({ _id: saveUser._id }, process.env.TOKEN_SECRET || 'tokentest');
+    // para regresar tanto el token como cabecera como el usuario guardado
+    res.header('auth-token', token).json(saveUser);
 });
 exports.signup = signup;
 const signin = (req, res) => {
