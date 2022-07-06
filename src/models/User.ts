@@ -1,14 +1,19 @@
 import { Schema, model, Document } from 'mongoose'
 import bcryptjs from 'bcryptjs'
 
-// creamos una interfaz para dar a conocer que atributos 
-// podrán ser utilizados en typescript y se podán autocompletar
-// el Document servira para añadir estas propiedades a un documento
+/*
+    creamos una interfaz para dar a conocer que atributos 
+    podrán ser utilizados en typescript y se podán autocompletar
+    el Document servira para añadir estas propiedades a un documento
+    también se debe agregar los métodos para el Document lo identifique
+*/
 
 export interface IUser extends Document{
-    username: string,
-    email: string,
-    password: string
+    username: string;
+    email: string;
+    password: string;
+    encryptPassword(password: string): Promise<string>;
+    validatePassword(password: string): Promise<boolean>;
 }
 
 const userSchema = new Schema({
