@@ -45,7 +45,6 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.signin = signin;
 const profile = (req, res) => {
-    res.send('profile');
 };
 exports.profile = profile;
 //# sourceMappingURL=auth.controller.js.map
