@@ -1,4 +1,5 @@
 import { Schema, model, Document } from 'mongoose'
+import bcryptjs from 'bcryptjs'
 
 // creamos una interfaz para dar a conocer que atributos 
 // podrán ser utilizados en typescript y se podán autocompletar
@@ -10,7 +11,7 @@ export interface IUser extends Document{
     password: string
 }
 
-const UserSchema = new Schema({
+const userSchema = new Schema({
         username: {
             type: String,
             required: true,
@@ -29,4 +30,15 @@ const UserSchema = new Schema({
         }
 });
 
-export default model<IUser>('User', UserSchema);
+//encriptando la contraseña
+userSchema.methods.encryptPassword = async ( password: string ): Promise<string> => {
+    const salt = await bcryptjs.genSalt(10)
+    return bcryptjs.hash(password, salt)
+}
+
+// método para validar la contraseña de los usuarios
+userSchema.methods.validatePassword = async function (password: string): Promise<boolean>{
+    return await bcryptjs.compare(password, this.password)
+}   
+
+export default model<IUser>('User', userSchema);
