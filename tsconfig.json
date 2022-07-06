@@ -105,5 +105,7 @@
   "include":["src"],
 
   // es para dar a conocer que directorios se debe excluir
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+
+  "files" : ["types.d.ts"]
 }

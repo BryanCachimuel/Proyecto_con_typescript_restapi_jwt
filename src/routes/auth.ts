@@ -1,7 +1,7 @@
 import { Router } from 'express';
 const router: Router = Router();
 
-import { TokenValidate } from '../libs/varifyToken'
+import { TokenValidate } from '../libs/verifyToken'
 
 import { signup, signin, profile } from '../controllers/auth.controller'
 
